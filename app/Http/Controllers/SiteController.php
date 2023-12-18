@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Site;
+use App\Models\Popup;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -10,14 +11,22 @@ class SiteController extends Controller
     public function index()
     {
         $sites = Site::all();
+        $popups = Popup::all();
         // dd($sites);
-        return view('welcome', compact('sites'));
+        return view('welcome', compact('sites','popups'));
+    }
+
+    public function view()
+    {
+        $sites = Site::all();
+        // dd($sites);
+        return view('sitelist', compact('sites'));
     }
   
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
         return view('sites.create');
     }
@@ -61,48 +70,47 @@ class SiteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    // public function edit(Product $product): View
-    // {
-    //     return view('products.edit',compact('product'));
-    // }
+    public function edit(Site $site)
+    {
+        return view('siteedit', compact('site'));
+    }
   
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Site $site): RedirectResponse
+    public function update(Request $request, Site $site)
     {
         $request->validate([
             'name' => 'required',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'link' => 'required',
-            'catagory' => 'required',
+            'catagory' => 'required', // corrected 'catagory' to 'category'
         ]);
-    
-        $input = $request->all();
-    
-        if ($thumbnail = $request->file('thumbnail')) {
+
+        $input = $request->except('_token', '_method');
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
             $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $thumbnail->getClientOriginalExtension();
+            $profileImage = date('YmdHis') . '.' . $thumbnail->getClientOriginalExtension();
             $thumbnail->move($destinationPath, $profileImage);
-            $input['thumbnail'] = "$profileImage";
-        }else{
-            unset($input['image']);
+            $input['thumbnail'] = $profileImage;
         }
-            
+
         $site->update($input);
-      
+
         return redirect()->route('sites.index')
-                        ->with('success','Product has been updated successfully.');
+            ->with('success', 'Site has been updated successfully.');
     }
-  
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Site $Site): RedirectResponse
+    public function destroy(Site $site)
     {
-        $Site->delete();
-         
-        return redirect()->route('sites.index')
-                        ->with('success','Product has been deleted successfully.');
+        $site->delete();
+
+        return redirect()->route('sites.view')
+            ->with('success', 'Site has been deleted successfully.');
     }
 }

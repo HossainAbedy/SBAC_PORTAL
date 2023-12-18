@@ -18,8 +18,19 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::get('/popups', [App\Http\Controllers\PopupController::class, 'index2'])->name('popups.index2');
+Route::get('/popupview', [App\Http\Controllers\PopupController::class, 'view'])->name('popups.view');
+Route::post('/popupstore', [App\Http\Controllers\PopupController::class, 'store'])->name('popups.store');
+Route::delete('/popupdelete/{popup}', [App\Http\Controllers\PopupController::class, 'destroy'])->name('popups.delete');
+
+
+
 Route::get('/', [App\Http\Controllers\SiteController::class, 'index'])->name('sites.index');
 Route::post('/store', [App\Http\Controllers\SiteController::class, 'store'])->name('sites.store');
+Route::get('/view', [App\Http\Controllers\SiteController::class, 'view'])->name('sites.view');
+Route::get('/edit/{site}', [App\Http\Controllers\SiteController::class, 'edit'])->name('sites.edit');
+Route::put('/update/{site}', [App\Http\Controllers\SiteController::class, 'update'])->name('sites.update');
+Route::delete('/delete/{site}', [App\Http\Controllers\SiteController::class, 'destroy'])->name('sites.delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

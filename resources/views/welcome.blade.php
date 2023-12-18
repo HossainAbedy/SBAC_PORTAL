@@ -5,11 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>SBAC PORTAL</title>
-
-        <!-- Fonts -->
-        <!-- <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" /> -->
-
         @vite('resources/css/app.css')
     </head>
     <body class="antialiased">
@@ -29,17 +24,35 @@
                     </div>
                 @endif
             </div>
+
+            @foreach($popups as $popup)
+            <div id="popupModal" class="fixed inset-0 z-50 hidden overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="bg-white p-6 rounded shadow-xl w-1/2">
+                    <h2 class="text-xl font-semibold mb-4">Welcome to SBAC WEB PORTAL!</h2>
+                    <p class="text-gray-700">Explore the latest from SBACBL...</p>
+                    @if(isset($popup['status']) && $popup['status'] === 'active')
+                        <img src="/images/{{ $popup['popup'] }}" style="width: 75px; height: 75px;" class="object-cover object-center">
+                    @else
+                        <div class="bg-cover bg-center bg-no-repeat" style="background-image: url('/images/11121.gif'); width: 100%; height: 300px;"></div>
+                    @endif
+                    <button id="closeModal" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">Close</button>
+                </div>
+            </div>
+            @endforeach
+
             <div class="flex flex-row"> 
-                <div class="w-8/1 m-2 p-4 shadow-md">
+                <div class="w-8/12 m-2 p-4 shadow-md">
                     @php $chunkedSites = $sites->toArray(); @endphp
                         @foreach(array_chunk($chunkedSites, 6) as $chunk)
                             <div class="flex ">
                                 @foreach($chunk as $site)
-                                    <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
-                                        <a class="btn btn-primary" href="{{ $site['link'] }}"> 
-                                            <img src="/images/{{ $site['thumbnail'] }}" style="width: 75px; height: 75px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
-                                        </a>
-                                    </div>
+                                    @if(isset($site['catagory']) && $site['catagory'] === 'one')
+                                        <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
+                                            <a class="btn btn-primary" href="{{ $site['link'] }}"> 
+                                                <img src="/images/{{ $site['thumbnail'] }}" style="width: 75px; height: 75px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
+                                            </a>
+                                        </div>
+                                    @endif    
                                 @endforeach
                             </div>
                         @endforeach
@@ -49,25 +62,29 @@
                         @foreach(array_chunk($chunkedSites, 4) as $chunk)
                             <div class="flex">
                                 @foreach($chunk as $site)
-                                    <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
-                                        <a class="btn btn-primary" href="{{ $site['link'] }}"> 
-                                            <img src="/images/{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
-                                        </a>
-                                    </div>
+                                    @if(isset($site['catagory']) && $site['catagory'] === 'two')
+                                        <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
+                                            <a class="btn btn-primary" href="{{ $site['link'] }}"> 
+                                                <img src="/images/{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
+                                            </a>
+                                        </div>
+                                    @endif    
                                 @endforeach
                             </div>
                         @endforeach
                 </div>
-                <div class="w-4/1 m-2 p-4 shadow-md">
+                <div class="w-4/12 m-2 p-4 shadow-md">
                     @php $chunkedSites = $sites->toArray(); @endphp
                         @foreach(array_chunk($chunkedSites, 4) as $chunk)
                             <div class="flex">
                                 @foreach($chunk as $site)
-                                    <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
-                                        <a class="btn btn-primary" href="{{ $site['link'] }}"> 
-                                            <img src="/images/{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
-                                        </a>
-                                    </div>
+                                    @if(isset($site['catagory']) && $site['catagory'] === 'three')
+                                        <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
+                                            <a class="btn btn-primary" href="{{ $site['link'] }}"> 
+                                                <img src="/images/{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
+                                            </a>
+                                        </div>
+                                    @endif    
                                 @endforeach
                             </div>
                         @endforeach
@@ -75,4 +92,26 @@
             </div>
         </div>
     </body>
+    <script>
+            window.onload = function() {
+            const modal = document.getElementById('popupModal');
+            const closeModal = document.getElementById('closeModal');
+
+            // Function to display the modal
+            function showModal() {
+                modal.classList.remove('hidden');
+            }
+
+            // Function to hide the modal
+            function hideModal() {
+                modal.classList.add('hidden');
+            }
+
+            // Show the modal when the user visits the site
+            showModal();
+
+            // Close the modal when the user clicks the close button
+            closeModal.addEventListener('click', hideModal);
+        };
+    </script>
 </html>
