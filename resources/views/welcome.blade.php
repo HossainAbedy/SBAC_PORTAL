@@ -8,23 +8,39 @@
         @vite('resources/css/app.css')
     </head>
     <body class="antialiased">
-        <div class="flex">
-            <div class="flex flex-row">
-                @if (Route::has('login'))
-                    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                            @endif
-                        @endauth
+            <div class="flex">
+                <div class="flex">
+                    <!-- Logo -->
+                    <div class="shrink-0 flex items-center">
+                        <a href="https://www.sbacbank.com/">
+                            <!-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> -->
+                            <img src="/images/website.png" style="width: 75px; height: 75px;" class="object-cover object-center">
+                        </a>
                     </div>
-                @endif
-            </div>
 
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('sites.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('SBAC WEB PORTAL') }}
+                        </x-nav-link>
+                    </div>
+                </div>
+                <div class="flex flex-row">
+                    @if (Route::has('login'))
+                        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
+                </div>
+            </div>
             @foreach($popups as $popup)
                 @if($popup['status'] === 'active')
                     <div id="popupModal" class="fixed inset-0 z-50 hidden overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
@@ -44,7 +60,7 @@
                         @foreach(array_chunk($chunkedSites, 6) as $chunk)
                             <div class="flex ">
                                 @foreach($chunk as $site)
-                                    @if(isset($site['catagory']) && $site['catagory'] === 'one')
+                                    @if(isset($site['category']) && $site['category'] === 'one')
                                         <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
                                                 <img src="/images/{{ $site['thumbnail'] }}" style="width: 75px; height: 75px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
@@ -60,7 +76,7 @@
                         @foreach(array_chunk($chunkedSites, 4) as $chunk)
                             <div class="flex">
                                 @foreach($chunk as $site)
-                                    @if(isset($site['catagory']) && $site['catagory'] === 'two')
+                                    @if(isset($site['category']) && $site['category'] === 'two')
                                         <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
                                                 <img src="/images/{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
@@ -76,7 +92,7 @@
                         @foreach(array_chunk($chunkedSites, 4) as $chunk)
                             <div class="flex">
                                 @foreach($chunk as $site)
-                                    @if(isset($site['catagory']) && $site['catagory'] === 'three')
+                                    @if(isset($site['category']) && $site['category'] === 'three')
                                         <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
                                                 <img src="/images/{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
@@ -88,7 +104,6 @@
                         @endforeach
                 </div>
             </div>
-        </div>
     </body>
     <script>
             window.onload = function() {

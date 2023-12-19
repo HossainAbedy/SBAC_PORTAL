@@ -56,7 +56,7 @@ class SiteController extends Controller
       
         Site::create($input);
        
-        return redirect()->route('sites.index')
+        return redirect()->route('sites.view')
                         ->with('success','Site created successfully.');
     }
   
@@ -100,7 +100,7 @@ class SiteController extends Controller
 
         $site->update($input);
 
-        return redirect()->route('sites.index')
+        return redirect()->route('sites.view')
             ->with('success', 'Site has been updated successfully.');
     }
 

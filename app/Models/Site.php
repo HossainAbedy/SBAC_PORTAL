@@ -10,6 +10,6 @@ class Site extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'link', 'thumbnail','catagory'
+        'name', 'link', 'thumbnail','category'
     ];
 }

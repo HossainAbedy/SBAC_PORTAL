@@ -1,11 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
-        <!-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Add Sites') }}
-        </h2> -->
+        </h2>
         <div class="mt-6 flex items-center justify-end gap-x-6">
             <div class="pull-right">
-                <a class="btn btn-primary rounded-md  bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="{{ route('popups.index2') }}"> Popups</a>
+                <a class="btn btn-primary rounded-md  bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="{{ route('sites.index') }}"> Home</a>
+            </div>
+            <div class="pull-left">
+                <a class="btn btn-primary rounded-md  bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="{{ route('sites.view') }}"> View Sites</a>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary rounded-md  bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="{{ route('popups.index2') }}"> View Popups</a>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary rounded-md  bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="{{ route('popups.view') }}"> Add Popups</a>
@@ -68,12 +74,6 @@
 
                             <div class="mt-6 flex items-center justify-end gap-x-6">
                                 <button type="button" class="rounded-md  bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onclick="resetForm()">Cancel</button>
-                                <div class="pull-right">
-                                    <a class="btn btn-primary rounded-md  bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="{{ route('sites.view') }}"> View</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a class="btn btn-primary rounded-md  bg-yellow-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="{{ route('sites.index') }}"> Back</a>
-                                </div>
                                 <button type="submit" class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
                             </div>
                         </div>     
