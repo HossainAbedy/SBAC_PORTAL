@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Site;
 use App\Models\Popup;
 use Illuminate\Http\Request;
+use App\Http\Controllers\PopupController;
 
 class SiteController extends Controller
 {
     public function index()
     {
         $sites = Site::all();
-        $popups = Popup::all();
-        // dd($sites);
+        $popupController = new PopupController();
+        $popups = $popupController->index1();
         return view('welcome', compact('sites','popups'));
     }
 

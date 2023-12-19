@@ -10,7 +10,7 @@ class PopupController extends Controller
     public function index1()
     {
         $popups = Popup::all();
-        return view('welcome', compact('popups'));
+        return $popups;
     }
 
     public function index2()
@@ -22,6 +22,29 @@ class PopupController extends Controller
     public function view()
     {
         return view('addpopup');
+    }
+
+    public function activate($id)
+    {
+        Popup::where('id', '!=', $id)->update(['status' => 'inactive']);
+        $popup = Popup::findOrFail($id);
+
+        // Update the status to 'inactive'
+        $popup->status = 'active';
+        $popup->save();
+
+        return redirect()->back()->with('success', 'Popup activated successfully');
+    }
+
+    public function deactivate($id)
+    {
+        $popup = Popup::findOrFail($id);
+
+        // Update the status to 'inactive'
+        $popup->status = 'inactive';
+        $popup->save();
+
+        return redirect()->back()->with('success', 'Popup deactivated successfully');
     }
 
     public function store(Request $request)

@@ -13,19 +13,54 @@
         </div>    
     </x-slot>
             <div class="flex flex-row"> 
-                <div class="w-8/12 m-2 p-4 shadow-md">
+                <div class="m-2 p-4 shadow-md">
                     @php $chunkedSites = $popups->toArray(); @endphp
                         @foreach(array_chunk($chunkedSites, 6) as $chunk)
                             <div class="flex ">
                                 @foreach($chunk as $popup)
                                         <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="#"> 
-                                                <img src="/images/{{ $popup['popup'] }}" style="width: 75px; height: 75px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
+                                                <img src="/images/{{ $popup['popup'] }}" style="width: 200px; height: 100px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
                                             </a>
+                                            @if($popup['status'] === 'inactive')
+                                                <!-- <a class="btn absolute top-0 left-0 bg-yellow-500 text-white font-semibold py-0.25 px-0.25 rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out text-xs md:text-sm lg:text-base"
+                                                href="#">
+                                                    In Active
+                                                </a> -->
+
+                                                <form action="{{ route('popups.activate', ['popup' => $popup['id']]) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="btn absolute top-0 left-0 bg-yellow-500
+                                                 text-white font-semibold py-0.25 px-0.25 rounded-full 
+                                                 shadow-md hover:bg-yellow-700 transition duration-300 
+                                                 ease-in-out text-xs md:text-sm lg:text-base" type="submit">
+                                                 In Active
+                                                </button>
+                                            </form>
+
+                                            @endif
+                                            @if($popup['status'] === 'active')
+                                            <form action="{{ route('popups.deactivate', ['popup' => $popup['id']]) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="btn absolute top-0 right-0 bg-green-500
+                                                 text-white font-semibold py-0.25 px-0.25 rounded-full 
+                                                 shadow-md hover:bg-green-700 transition duration-300 
+                                                 ease-in-out text-xs md:text-sm lg:text-base" type="submit">
+                                                 Active
+                                                </button>
+                                            </form>
+                                            @endif
                                             <form action="{{ route('popups.delete', ['popup' => $popup['id']]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn absolute bottom-0 right-0 bg-red-500 text-white font-semibold py-0.25 px-0.25 rounded-full shadow-md hover:bg-red-700 transition duration-300 ease-in-out text-xs md:text-sm lg:text-base" type="submit">Delete</button>
+                                                <button class="btn absolute bottom-0 right-0 bg-red-500 
+                                                text-white font-semibold py-0.25 px-0.25 rounded-full 
+                                                shadow-md hover:bg-red-700 transition duration-300 
+                                                ease-in-out text-xs md:text-sm lg:text-base" type="submit">
+                                                Delete
+                                                </button>
                                             </form>
                                         </div>
                                 @endforeach

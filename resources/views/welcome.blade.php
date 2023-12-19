@@ -26,18 +26,16 @@
             </div>
 
             @foreach($popups as $popup)
-            <div id="popupModal" class="fixed inset-0 z-50 hidden overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
-                <div class="bg-white p-6 rounded shadow-xl w-1/2">
-                    <h2 class="text-xl font-semibold mb-4">Welcome to SBAC WEB PORTAL!</h2>
-                    <p class="text-gray-700">Explore the latest from SBACBL...</p>
-                    @if(isset($popup['status']) && $popup['status'] === 'active')
-                        <img src="/images/{{ $popup['popup'] }}" style="width: 75px; height: 75px;" class="object-cover object-center">
-                    @else
-                        <div class="bg-cover bg-center bg-no-repeat" style="background-image: url('/images/11121.gif'); width: 100%; height: 300px;"></div>
-                    @endif
-                    <button id="closeModal" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">Close</button>
-                </div>
-            </div>
+                @if($popup['status'] === 'active')
+                    <div id="popupModal" class="fixed inset-0 z-50 hidden overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
+                        <div class="bg-white p-6 rounded shadow-xl w-1/2">
+                            <h2 class="text-xl font-semibold mb-4">Welcome to SBAC WEB PORTAL!</h2>
+                            <p class="text-gray-700">Explore the latest from SBACBL...</p>
+                            <img src="/images/{{ $popup['popup'] }}" style="width: 100%; height: 300px;" class="bg-cover bg-center bg-no-repeat object-cover object-center">
+                            <button id="closeModal" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">Close</button>
+                        </div>
+                    </div>
+                @endif
             @endforeach
 
             <div class="flex flex-row"> 
