@@ -42,7 +42,7 @@ class SiteController extends Controller
             'name' => 'required',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'link' => 'required',
-            'catagory' => 'required',
+            'category' => 'required',
         ]);
     
         $input = $request->all();
@@ -85,7 +85,7 @@ class SiteController extends Controller
             'name' => 'required',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'link' => 'required',
-            'catagory' => 'required', // corrected 'catagory' to 'category'
+            'category' => 'required', // corrected 'catagory' to 'category'
         ]);
 
         $input = $request->except('_token', '_method');

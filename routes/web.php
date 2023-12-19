@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [App\Http\Controllers\PopupController::class, 'index1'])->name('popups.index1');
+
 Route::get('/popups', [App\Http\Controllers\PopupController::class, 'index2'])->name('popups.index2');
 Route::get('/popupview', [App\Http\Controllers\PopupController::class, 'view'])->name('popups.view');
 Route::post('/popupstore', [App\Http\Controllers\PopupController::class, 'store'])->name('popups.store');
