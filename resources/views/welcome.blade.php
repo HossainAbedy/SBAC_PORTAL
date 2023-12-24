@@ -63,7 +63,7 @@
                                     @if(isset($site['category']) && $site['category'] === 'one')
                                         <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
-                                                <img src="/images/{{ $site['thumbnail'] }}" style="width: 75px; height: 75px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
+                                                <img src="{{ $site['thumbnail'] }}" style="width: 75px; height: 75px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
                                             </a>
                                         </div>
                                     @endif    
@@ -79,7 +79,7 @@
                                     @if(isset($site['category']) && $site['category'] === 'two')
                                         <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
-                                                <img src="/images/{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
+                                                <img src="{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
                                             </a>
                                         </div>
                                     @endif    
@@ -95,7 +95,7 @@
                                     @if(isset($site['category']) && $site['category'] === 'three')
                                         <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
-                                                <img src="/images/{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
+                                                <img src="{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
                                             </a>
                                         </div>
                                     @endif    
