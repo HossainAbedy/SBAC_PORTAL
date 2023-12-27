@@ -47,11 +47,12 @@ class SiteController extends Controller
     
         $input = $request->all();
     
-        if ($thumbnail = $request->file('thumbnail')) {
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
             $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $thumbnail->getClientOriginalExtension();
+            $profileImage = date('YmdHis') . '.' . $thumbnail->getClientOriginalExtension();
             $thumbnail->move($destinationPath, $profileImage);
-            $input['thumbnail'] = "$profileImage";
+            $input['thumbnail'] = $destinationPath . $profileImage; // Append 'images/' to the file path
         }
       
         Site::create($input);
@@ -85,21 +86,21 @@ class SiteController extends Controller
             'name' => 'required',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'link' => 'required',
-            'category' => 'required', // corrected 'catagory' to 'category'
+            'category' => 'required', 
         ]);
-
+        
         $input = $request->except('_token', '_method');
-
+        
         if ($request->hasFile('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . '.' . $thumbnail->getClientOriginalExtension();
             $thumbnail->move($destinationPath, $profileImage);
-            $input['thumbnail'] = $profileImage;
+            $input['thumbnail'] = $destinationPath . $profileImage; // Append 'images/' to the file path
         }
-
+        
         $site->update($input);
-
+        
         return redirect()->route('sites.view')
             ->with('success', 'Site has been updated successfully.');
     }

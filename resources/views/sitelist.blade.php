@@ -10,17 +10,17 @@
         </div>        
     </x-slot>
             <div class="flex flex-row"> 
-                <div class="w-8/12 m-2 p-4 shadow-md">
+                <div class="w-8/12 m-2 p-2 shadow-lg shadow-red-700">
                     @php $chunkedSites = $sites->toArray(); @endphp
                         @foreach(array_chunk($chunkedSites, 6) as $chunk)
                             <div class="flex ">
                                 @foreach($chunk as $site)
                                     @if(isset($site['category']) && $site['category'] === 'one')
-                                        <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
+                                        <div class="shadow-red-700 m-1 p-1 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
                                                 <img src="{{ $site['thumbnail'] }}" style="width: 75px; height: 75px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
                                             </a>
-                                            <a class="btn absolute top-0 left-0 bg-blue-500 text-white font-semibold py-0.25 px-0.25 rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out text-xs md:text-sm lg:text-base"
+                                            <a class="btn absolute top-0 left-0 bg-orange-500 text-white font-semibold py-0.25 px-0.25 rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out text-xs md:text-sm lg:text-base"
                                             href="{{ route('sites.edit', ['site' => $site['id']]) }}">
                                                 Edit
                                             </a>
@@ -37,17 +37,17 @@
                             </div>
                         @endforeach
                 </div>
-                <div class="w-4/12 m-2 p-4 shadow-md">
+                <div class="w-4/12 m-2 p-2 shadow-lg shadow-blue-700">
                     @php $chunkedSites = $sites->toArray(); @endphp
                         @foreach(array_chunk($chunkedSites, 4) as $chunk)
                             <div class="flex">
                                 @foreach($chunk as $site)
                                     @if(isset($site['category']) && $site['category'] === 'two')
-                                        <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
+                                        <div class="shadow-blue-700 m-1 p-1 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
                                                 <img src="{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
                                             </a>
-                                            <a class="btn absolute top-0 left-0 bg-blue-500 text-white font-semibold py-0.25 px-0.25 rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out text-xs md:text-sm lg:text-base"
+                                            <a class="btn absolute top-0 left-0 bg-orange-500 text-white font-semibold py-0.25 px-0.25 rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out text-xs md:text-sm lg:text-base"
                                             href="{{ route('sites.edit', ['site' => $site['id']]) }}">
                                                 Edit
                                             </a>
@@ -63,17 +63,17 @@
                             </div>
                         @endforeach
                 </div>
-                <div class="w-4/12 m-2 p-4 shadow-md">
+                <div class="w-4/12 m-2 p-2 shadow-lg shadow-green-700">
                     @php $chunkedSites = $sites->toArray(); @endphp
                         @foreach(array_chunk($chunkedSites, 4) as $chunk)
                             <div class="flex">
                                 @foreach($chunk as $site)
                                     @if(isset($site['category']) && $site['category'] === 'three')
-                                        <div class="m-2 p-4 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
+                                        <div class="shadow-green-700 m-1 p-1 shadow-md transition duration-300 ease-in-out transform hover:scale-110">
                                             <a class="btn btn-primary" href="{{ $site['link'] }}"> 
                                                 <img src="{{ $site['thumbnail'] }}" style="width: 45px; height: 45px;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
                                             </a>
-                                            <a class="btn absolute top-0 left-0 bg-blue-500 text-white font-semibold py-0.25 px-0.25 rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out text-xs md:text-sm lg:text-base"
+                                            <a class="btn absolute top-0 left-0 bg-orange-500 text-white font-semibold py-0.25 px-0.25 rounded-full shadow-md hover:bg-blue-700 transition duration-300 ease-in-out text-xs md:text-sm lg:text-base"
                                             href="{{ route('sites.edit', ['site' => $site['id']]) }}">
                                                 Edit
                                             </a>
