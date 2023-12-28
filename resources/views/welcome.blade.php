@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="antialiased">
-    <div class="flex items-center justify-between p-4">
+    <div class="flex bg-black">
         <!-- Navigation Links -->
         <div>
             @if (Route::has('login'))
@@ -34,19 +34,19 @@
                     <h2 class="text-xl font-semibold mb-4">Welcome to SBAC WEB PORTAL!</h2>
                     <p class="text-gray-700">Explore the latest from SBACBL...</p>
                     <img src="/images/{{ $popup['popup'] }}" style="width: 100%; height: 300px;" class="bg-cover bg-center bg-no-repeat object-cover object-center">
-                    <button id="closeModal" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">Close</button>
+                    <button id="closeModal" class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded mt-4">Close</button>
                 </div>
             </div>
         @endif
     @endforeach
 
     <!-- Main Content -->
-    <div class="flex justify-center items-center h-screen"> <!-- Center horizontally and vertically -->
-        <div class="mt-20 p-2 shadow-lg shadow-red-700">
-            <div class="flex items-center m-4 shadow-lg shadow-red-700">
+    <div class="shadow-lg bg-black shadow-white flex-vertical h-screen"> <!--main -->
+        <div class="shadow-lg bg-black shadow-white flex"> 
+            <div class="flex items-center shadow-lg justify-center shadow-white w-full">
                 <!-- Logo -->
-                <a href="https://www.sbacbank.com/" class="m-2 p-2 justify-items-center">
-                    <img src="/images/favicon.ico" style="width: 75px; height: 75px;" >
+                <a href="https://www.sbacbank.com/" class="justify-start">
+                    <img src="/images/favicon.ico" style="width: 25px; height: 25px;" >
                 </a>
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -55,16 +55,18 @@
                     </x-nav-link>
                 </div>
                 <!-- Search Box -->
-                <div class="m-2 p-2 justify-items-center shadow-lg shadow-red-700">
+                <div class="m-1 p-1 justify-items-center shadow-lg ">
                     <input type="text" id="searchInput" placeholder="Search by name..." class="text-xs border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-red-500" onkeydown="searchOnEnter(event)">
-                    <button onclick="searchFunction()" class="bg-red-500 text-xs text-white px-4 py-2 rounded-md ml-2">Search</button>
-                    <button onclick="refreshSearch()" id="refreshBtn" class="bg-red-500 text-xs text-white px-4 py-2 rounded-md ml-2 hidden">Refresh</button>
+                    <button onclick="searchFunction()" class="bg-red-700 hover:bg-red-500 text-xs text-black px-4 py-2 rounded-md ml-2">Search</button>
+                    <button onclick="refreshSearch()" id="refreshBtn" class="bg-red-700 hover:bg-red-500 text-xs text-black px-4 py-2 rounded-md ml-2 hidden">Refresh</button>
                 </div>
             </div> 
-            <!-- Images -->
-            <div class="flex flex-wrap" id="imageContainer">
+        </div>
+        <!-- Images -->
+        <div class="flex p-7 bg-black"> <!-- Center horizontally and vertically -->
+            <div class="flex flex-wrap bg-black" id="imageContainer">
                 @foreach($sites as $site)
-                    <div class="site-image shadow-red-700 m-1 p-1 shadow-md transition duration-300 ease-in-out transform hover:scale-110" style="width: 100px; height: 100px;" data-name="{{ $site['name'] }}">
+                    <div class="site-image bg-gray-300 shadow-red-700 m-1 p-1 shadow-md transition duration-300 ease-in-out transform hover:scale-110" style="width: 100px; height: 100px;" data-name="{{ $site['name'] }}">
                         <a class="btn btn-primary" href="{{ $site['link'] }}">
                             <img src="{{ $site['thumbnail'] }}" style="width: 100%; height: 100%;" class="object-cover object-center hover:scale-125 transition duration-300 ease-in-out">
                         </a>
@@ -73,7 +75,6 @@
             </div>
         </div>
     </div>
-
     <!-- JavaScript -->
     <script>
         window.onload = function() {
